@@ -21,7 +21,7 @@ function get_acfun(qwe, abc) {
             article.article_url = 'http://www.acfun.cn' + rank_article[i].querySelector('a').getAttribute('href'); 
             acfun.article.push(article);
         }
-        console.log(acfun);
+        //console.log(acfun);
         abc.jsonp(acfun); 
     });
 }

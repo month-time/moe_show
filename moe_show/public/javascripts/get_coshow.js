@@ -60,5 +60,28 @@ function trimRight(s) {
         str = str.substring(0, i + 1);
     }
     return str;
-}         
+}   
+function get_coshow_img(qwe, abc) {
+    var request = require('request');
+    var options = {
+        url: "../images/100Q_1x.jpg",
+        headers: {
+            "referer": "http://www.wadmz.com",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+            'Content-type': 'content-type'
+        },
+        encoding: null
+    }
+    if (qwe.query.img_url != undefined) {
+        var get_url = qwe.query.img_url;
+        options.url = get_url;
+        //console.log(options.url);
+    }
+    request.get(options, function (err, res, body) {
+        if (err) throw err;
+        //console.log(res.statusCode);
+        abc.send(body)
+    });
+}
 module.exports.get_coshow = get_coshow;
+module.exports.get_coshow_img = get_coshow_img;

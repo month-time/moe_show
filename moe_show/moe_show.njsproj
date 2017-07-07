@@ -30,15 +30,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="public\javascripts\get_acfun_api.js" />
     <Compile Include="public\javascripts\get_coshow.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="public\javascripts\get_acfun.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="public\javascripts\get_pixiv.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="public\javascripts\get_bilibili_api.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Content Include="package.json" />
+    <Content Include="public\images\100Q_1x.jpg" />
     <Content Include="public\stylesheets\main.css" />
     <Content Include="README.md" />
     <Content Include="views\index.pug" />
