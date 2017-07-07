@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var get_coshow = require('../public/javascripts/get_coshow');
+var get_acfun = require('../public/javascripts/get_acfun');
 /* GET home page. */
 router.get('/', function (req, res) {
     res.render('index', { title: 'Express' });
