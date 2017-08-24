@@ -17,7 +17,8 @@
             var url = "https://www.pixiv.net/" + ranking[i].getElementsByClassName("data")[0].querySelector("a").getAttribute("href");
             var image = dom.window.document.getElementsByClassName("_thumbnail ui-scroll-view")[i].getAttribute("data-src");
             image = image.replace('https://i.pximg.net/c/150x150/','https://i.pximg.net/c/240x480/');
-            var author = dom.window.document.getElementsByClassName("icon-text")[i].innerHTML;
+//            var author = dom.window.document.getElementsByClassName("icon-text")[i].innerHTML;
+            var author = ranking[i].getElementsByClassName("user-name")[0].innerHTML;
             var work = { title: '', image: "", url: '', author: '' };
             work.title = title; work.image = image; work.url = url; work.author = author;
             pixiv.works.push(work);
