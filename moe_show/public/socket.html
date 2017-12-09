@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<script>
+(function (doc, win) {
+    var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if(clientWidth>=640){
+                docEl.style.fontSize = '20px';
+            }else{
+                docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+            }
+        };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+<link rel="stylesheet" href="./stylesheets/css.css">
+<title>New HMTL document by NewJect</title>
+</head>
+
+  <body>
+<div class="tool_box">
+
+</div>
+<!--   消息区-->
+<div class="messages">
+    <ul id="messages">
+
+    </ul>
+    <form id="push_msg">
+      <input id="m" autocomplete="off" />
+      <button>Send</button>
+    </form>
+    <div style="background: #fff;display: none;">
+          <div id="disconnect">断开连接</div>
+          <div id="reconnect">重新连接</div>
+          <div id="obj">获取对象</div>
+    </div>
+</div>
+<!--    end-->
+  </body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+window.onload=function(){
+    get_nikename();
+    loadJson();
+    var socket = io('http://localhost:3000',{'force new connection': true});
+//    发送消息
+    document.querySelector("#push_msg button").onclick=function(){
+        var msg_poi={
+            id:socket.id,
+            name:nikename,
+            message:document.querySelector("#m").value
+        }
+        socket.emit('chat message', msg_poi);
+//        socket.emit('chat message', document.querySelector("#m").value);
+        document.querySelector("#m").value;
+        return false;
+    }
+//    监听聊天消息
+    socket.on('chat message', function(msg){
+      var get_message=$('<li>').html('<span class="title"><i class="user_ico"><img src="./images/mxb.jpg" alt=""></i>'+msg.name+'</span><p>'+msg.message+'</p>');
+      $('#messages').append(get_message);
+        get_message[0].scrollIntoView();
+        console.log(msg);
+    });
+
+    socket.on("login",function(msg){
+       console.log(msg);
+    });
+//    主动断开连接
+    document.querySelector("#disconnect").onclick=function(){
+        socket.disconnect();
+    }
+
+    //    主动断开连接
+    document.querySelector("#reconnect").onclick=function(){
+        alert();
+        socket=io({'force new connection': true});
+    }
+    document.querySelector("#obj").onclick=function(){
+        console.log(socket);
+    }
+}
+
+function get_nikename(){
+    window.nikename = prompt("请输入您的名字", "");
+    if(window.nikename==""||window.nikename==null||window.nikename==undefined){
+        get_nikename();
+    }else{
+        alert('您的昵称是:'+window.nikename);
+    }
+}
+
+function loadJson()
+{
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	{
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+    xmlhttp.open("get","http://api.hitokoto.cn",true);
+//    xmlhttp.setRequestHeader('Content-type','application/JSON');
+	xmlhttp.send("");
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			data=xmlhttp.responseText;
+            jsonTo=JSON.parse(data);
+            var get_message=$('<li>').html('<span class="title"><i class="user_ico"><img src="./images/mxb.jpg" alt=""></i>'+jsonTo.from+'</span><p>'+jsonTo.hitokoto+'</p>');
+            $('#messages').append(get_message);
+            get_message[0].scrollIntoView();
+        }
+	}
+}
+</script>
+</html>

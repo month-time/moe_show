@@ -63,3 +63,21 @@ app.set('port', process.env.PORT || 3000);
 var server = app.listen(app.get('port'), function () {
     debug('Express server listening on port ' + server.address().port);
 });
+
+//创建socket服务
+var io = require('socket.io')(server);
+//监听客户端连接事件
+io.on('connection', function(socket){
+  socket.broadcast.emit("login",{id:'1000',name:"System",message:socket.id+'登录了'});
+//  客户端断开连接事件
+  socket.on('disconnect', function(){
+      console.log(socket.id+"连接断开");
+      io.emit('disconnect',{id:'1000',name:"System", message:socket.id+"连接断开"});
+//      io.emit('chat message', io.sockets.clients());
+  });
+//    获取用户聊天消息信息
+  socket.on('chat message', function(msg){
+      io.emit('chat message', {id:msg.id,name:msg.name,message:msg.message});
+  });
+
+});
