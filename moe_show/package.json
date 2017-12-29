@@ -16,6 +16,8 @@
     "express": "^4.14.0",
     "jsdom": "^11.1.0",
     "morgan": "^1.7.0",
+    "mysql": "^2.15.0",
+    "node-schedule": "^1.2.5",
     "pug": "^2.0.0-beta6",
     "request": "^2.81.0",
     "serve-favicon": "^2.3.0",

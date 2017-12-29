@@ -7,6 +7,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//Scheduled Tasks modules
+var schedule = require("node-schedule");
+var scheduled_tasks = require('./public/javascripts/Scheduled_Tasks');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -81,3 +85,6 @@ io.on('connection', function(socket){
   });
 
 });
+
+console.log("阿斯蒂芬");
+scheduled_tasks.scheduled_tasks();

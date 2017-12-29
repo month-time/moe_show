@@ -47,7 +47,7 @@ function trimLeft(s) {
         str = str.substring(j, i);
     }
     return str;
-}  
+}
 function trimRight(s) {
     if (s == null) return "";
     var whitespace = new String(" \t\n\r");
@@ -60,7 +60,7 @@ function trimRight(s) {
         str = str.substring(0, i + 1);
     }
     return str;
-}   
+}
 function get_coshow_img(qwe, abc) {
     var request = require('request');
     var options = {

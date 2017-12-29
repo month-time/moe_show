@@ -38,8 +38,8 @@ function get_anime_list(qwe, abc) {
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
             'Content-type': 'text/html;charset=utf-8'
         }
-    }    
-    request.get(options, function (err, res, body) { 
+    }
+    request.get(options, function (err, res, body) {
         var datas = body.replace('timeline(', '');
         var datas = datas.replace(');', '');
         var xinfan = JSON.parse(datas);
@@ -63,7 +63,7 @@ function get_anime_list(qwe, abc) {
                 case 5: bili_list.animes_5.push(anime); break;
                 case 6: bili_list.animes_6.push(anime); break;
                 default: break;
-            }            
+            }
         }
         abc.jsonp(bili_list);
     });

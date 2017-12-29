@@ -18,11 +18,11 @@ function get_acfun(qwe, abc) {
         for (var i = 0; i < rank_article.length; i++){
             var article = { article_title: '', article_url: ''};
             article.article_title = rank_article[i].querySelector('a').innerHTML;
-            article.article_url = 'http://www.acfun.cn' + rank_article[i].querySelector('a').getAttribute('href'); 
+            article.article_url = 'http://www.acfun.cn' + rank_article[i].querySelector('a').getAttribute('href');
             acfun.article.push(article);
         }
         //console.log(acfun);
-        abc.jsonp(acfun); 
+        abc.jsonp(acfun);
     });
 }
 module.exports.get_acfun = get_acfun;
