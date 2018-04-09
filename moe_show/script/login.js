@@ -28,10 +28,11 @@ async.series({
        });
     }else{
 //       console.log("Login Err!");
+       abc.cookie("isLogin",0,{maxAge: 60 * 1000})
        abc.send({
-           staus:true,
+           staus:false,
            msg:"Login Err!!",
-           private_key:"get_reg_date"+get_reg_date,
+           private_key:get_reg_date,
        });
     }
 //    console.timeEnd('series');
@@ -81,7 +82,6 @@ function time_encrypt(str, timestamps) {
     str = str_n.join('');
     return str;
 }
-
 
 function time_decrypt(str,timestamps) {
     var str=str;
