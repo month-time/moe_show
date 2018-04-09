@@ -6,3 +6,14 @@ var sql_option={
   database        : 'month_time',
 }
 module.exports.sql_option = sql_option;
+
+
+function isLogin(){
+    
+}
+module.exports.isLogin = isLogin;
+
+function user_info(){
+    
+}
+module.exports.user_info = user_info;

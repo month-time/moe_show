@@ -6,7 +6,6 @@ var get_pixiv = require('../public/javascripts/get_pixiv');
 var get_acfun = require('../public/javascripts/get_acfun');
 var get_acfun_api = require('../public/javascripts/get_acfun_api');
 var get_bilibili_api = require('../public/javascripts/get_bilibili_api');
-var get_tucao = require('../public/javascripts/get_tucao');
 var proxy = require('../public/javascripts/proxy');
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -64,13 +63,6 @@ router.get('/get_piximg', function (req, res) {
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     get_pixiv.get_piximg(req, res);
 });
-router.get('/get_tucao', function (req, res) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');  
-    get_tucao.get_tucao(req, res);
-});
-
 
 //tucao.tv videoUrl代理
 //router.get('/proxy', function (req, res) {

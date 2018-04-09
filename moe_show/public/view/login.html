@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="stylesheet" href="../stylesheets/login.css">
+<title>Welcome Login</title>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="wrapper">
+	<div class="container">
+		<h1>Welcome</h1>		
+		<div class="form" >
+			<input type="text" id="username" placeholder="Username">
+			<input type="password" id="Password" placeholder="Password">
+			<button type="button" id="login-button">Login</button>
+		</div>
+	</div>
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+<script type="text/javascript">
+$("document").ready(function(){
+    document.querySelector("#login-button").addEventListener("click",function(){
+        var timestamps=(new Date()).toJSON();
+        var poi=document.querySelector("#username").value;
+        var pwd=document.querySelector("#Password").value;
+        pwd=time_decrypt(pwd,timestamps);
+        console.log(timestamps);
+        $.ajax({
+            url:"/login",
+            type:"get",
+            data:{
+                name:poi,
+                reg_date:timestamps,
+                pwd:pwd,
+            },
+            success:function(result){
+                console.log(result);
+            }
+        });
+    });
+});
+function time_decrypt(str,timestamps) {
+    var str=str;
+    var myDate = new Date(timestamps);
+    var day = myDate.getDay();
+    var str_n = str.split('');
+    for (var i = 0; i < str_n.length; i++) {        
+        str_n[i] = parseInt(str_n[i].charCodeAt()) + day;
+        str_n[i] = String.fromCharCode(str_n[i]);
+    }
+    str = str_n.join('');
+    return str;
+}
+ </script>     
+</body>
+</html>
