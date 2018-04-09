@@ -87,4 +87,4 @@ io.on('connection', function(socket){
 });
 
 console.log("阿斯蒂芬");
-scheduled_tasks.scheduled_tasks();
+//scheduled_tasks.scheduled_tasks();
