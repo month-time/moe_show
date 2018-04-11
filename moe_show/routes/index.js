@@ -9,7 +9,7 @@ var get_bilibili_api = require('../public/javascripts/get_bilibili_api');
 var proxy = require('../public/javascripts/proxy');
 /* GET home page. */
 router.get('/', function (req, res) {
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: "月詩計's Api"});
 });
 //bilibili
 router.get('/get_anime_list', function (req, res) {

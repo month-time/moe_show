@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>C.G.Anime</title>
+<link rel="stylesheet" href="./style.css">
+<script src="./js/jquery-3.2.0.min.js"></script>
+<script src="//cdn.bootcss.com/angular.js/1.6.4/angular.min.js"></script>
+</head>
+<body>
+<div class="content">
+<div class="act act_exce" >
+<canvas id="canvas"></canvas>
+<h1 id="title">月時計</h1>
+<form style="visibility :hidden;">
+  <label id="ray-count" for="ray-input">Rays: 50</label>
+  <input type="range" id="ray-input" min="0" max="100"/>
+  <label id="particle-count" for="particle-input">Particles: 50</label>
+  <input type="range" id="particle-input" min="0" max="100"/>
+</form>
+<script src="./main.js"></script>
+</div>
+<div class="act act_two" style="">
+    <div class="text_box">
+        <h3>Там, на границе обмана</h3>
+        <p>梦与现实交界</p>
+        <p>Полети туда, где поёт душа(Poleti tuda, gde poyot dusha)</p>
+        <p>Жизнь тебе дала снова два крыла(Zhizn' tebe dala snova dva kryla)</p>
+    </div>
+</div>
+<div class="act act_three">
+    <div class="left_list">
+   <ul>
+    <li><a href="javascript:void(0)">Home</a></li>
+    <li><a href="javascript:void(0)">哔哩哔哩</a></li>
+    <li><a href="javascript:void(0)">Acfun文章</a></li>
+    <li><a href="javascript:void(0)">Pixiv国际周榜</a></li>
+    <li><a href="javascript:void(0)">近期漫展</a></li>
+    </ul>
+    </div>
+</div>
+<div class="header">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="https://blog.voide.cc">Blog</a></li>
+	  	<li><a href="https://test.voide.cc">My demo</a></li>
+    </ul>
+</div>
+<div class="act act_four" ng-app="myApp" ng-controller="myCtrl">
+   <div class="bilibili">
+      <div class="bili_new">
+         <h2 class="line_title">哔哩哔哩</h2>
+         <div class="bili_new_box">
+          <div class="bili_new_team" ng-repeat="x in bili_news.data | limitTo:8">
+              <a href="http://www.bilibili.com/video/av{{x.aid}}/">
+                 <div class="team_pic">
+                  <img src="https://api.voide.cc/get_bili_img?img_url={{x.pic}}" alt=""> 
+              </div>
+              <p class="team_title">{{x.title}}</p>
+              <p class="team_num">
+                  <span class="team_play"><i class="icon"></i>{{x.play}}</span>
+                  <span class="team_danmu"><i class="icon"></i>{{x.video_review}}</span>
+              </p>
+              </a>
+          </div>
+          </div>
+          <div style="clear:both"></div>
+      </div>
+      
+       <div class="comic">
+           <h2 class="line_title">新番</h2>
+            <div class="tab-block" id = "tab-block">  
+                <ul class="tab-mnu">
+                    <li class = "active" >星期日</li>
+                    <li>星期一</li>
+                    <li>星期二</li>
+                    <li>星期三</li>
+                    <li>星期四</li>
+                    <li>星期五</li>
+                    <li>星期六</li>
+                 </ul>  
+                <div class="tab-cont">
+                     <div class="tab-pane" >
+                         <div class="comic_team" ng-repeat="x in anime_list.animes_0 ">
+                             <div class="comic_cover"><img src="https://api.voide.cc/get_bili_img?img_url={{x.square_cover}}" alt=""></div>
+                             <a href="http://bangumi.bilibili.com/anime/{{x.season_id}}"><p>{{x.title}}</p></a>
+                             <p class="bgmcount"><span>{{x.bgmcount}}</span></p>
+                             <div style="clear:both;border:1px solid pink;"></div>
+                        </div>
+                     </div>
+                     <div class="tab-pane" >
+                         <div class="comic_team" ng-repeat="x in anime_list.animes_1 ">
+                             <div class="comic_cover"><img src="https://api.voide.cc/get_bili_img?img_url={{x.square_cover}}" alt=""></div>
+                             <a href="http://bangumi.bilibili.com/anime/{{x.season_id}}"><p>{{x.title}}</p></a>
+                             <p class="bgmcount"><span>{{x.bgmcount}}</span></p>
+                             <div style="clear:both;border:1px solid pink;"></div>
+                        </div>
+                     </div>
+                     <div class="tab-pane" >
+                         <div class="comic_team" ng-repeat="x in anime_list.animes_2 ">
+                             <div class="comic_cover"><img src="https://api.voide.cc/get_bili_img?img_url={{x.square_cover}}" alt=""></div>
+                             <a href="http://bangumi.bilibili.com/anime/{{x.season_id}}"><p>{{x.title}}</p></a>
+                             <p class="bgmcount"><span>{{x.bgmcount}}</span></p>
+                             <div style="clear:both;border:1px solid pink;"></div>
+                        </div>
+                     </div>
+				     <div class="tab-pane" >
+                         <div class="comic_team" ng-repeat="x in anime_list.animes_3 ">
+                             <div class="comic_cover"><img src="https://api.voide.cc/get_bili_img?img_url={{x.square_cover}}" alt=""></div>
+                             <a href="http://bangumi.bilibili.com/anime/{{x.season_id}}"><p>{{x.title}}</p></a>
+                             <p class="bgmcount"><span>{{x.bgmcount}}</span></p>
+                             <div style="clear:both;border:1px solid pink;"></div>
+                        </div>
+                     </div>
+				  	 <div class="tab-pane" >
+                         <div class="comic_team" ng-repeat="x in anime_list.animes_4 ">
+                             <div class="comic_cover"><img src="https://api.voide.cc/get_bili_img?img_url={{x.square_cover}}" alt=""></div>
+                             <a href="http://bangumi.bilibili.com/anime/{{x.season_id}}"><p>{{x.title}}</p></a>
+                             <p class="bgmcount"><span>{{x.bgmcount}}</span></p>
+                             <div style="clear:both;border:1px solid pink;"></div>
+                        </div>
+                     </div>
+				  	 <div class="tab-pane" >
+                         <div class="comic_team" ng-repeat="x in anime_list.animes_5 ">
+                             <div class="comic_cover"><img src="https://api.voide.cc/get_bili_img?img_url={{x.square_cover}}" alt=""></div>
+                             <a href="http://bangumi.bilibili.com/anime/{{x.season_id}}"><p>{{x.title}}</p></a>
+                             <p class="bgmcount"><span>{{x.bgmcount}}</span></p>
+                             <div style="clear:both;border:1px solid pink;"></div>
+                        </div>
+                     </div>
+				  	 <div class="tab-pane" >
+                         <div class="comic_team" ng-repeat="x in anime_list.animes_6 ">
+                             <div class="comic_cover"><img src="https://api.voide.cc/get_bili_img?img_url={{x.square_cover}}" alt=""></div>
+                             <a href="http://bangumi.bilibili.com/anime/{{x.season_id}}"><p>{{x.title}}</p></a>
+                             <p class="bgmcount"><span>{{x.bgmcount}}</span></p>
+                             <div style="clear:both;border:1px solid pink;"></div>
+                        </div>
+                     </div>
+                 </div>
+            </div>
+            <div class="clear:both;"></div>
+       </div>
+       <div style="clear:both;"></div>
+   </div>
+    <div class="acfun">
+       <h2 class="line_title">Acfun文章</h2>
+       <div class="acfun_area" ng-repeat="x in acfun | limitTo:10">
+           <a href="http://www.acfun.cn{{x.url}}">
+               <div class="acfun_term">
+                  <p class="acfun_title">{{x.title}}</p>
+                   <hr>
+                   <div class="acfun_click">热度：{{x.views}} </div>
+                   <div class="acfun_date">时间：{{x.releaseDate}} </div>
+               </div>
+           </a>
+       </div>
+       <div style="clear:both;"></div>
+   </div>
+   <div class="pixiv">
+      <div class="for_Line"></div>
+       <h2 class="line_title">Pixiv国际周榜</h2>
+       <div class="pixiv_area">
+          <a href="{{x.url}}" ng-repeat="x in pixiv_put.works track by $index">
+           <div class="pixiv_term" >
+               <img src="{{x.image}}" alt="">
+               <p class="pixiv_title">{{x.title}}</p>
+           </div> 
+          </a> 
+                   
+       </div>
+       <div class="getmore_btn"><a ng-click='getmore()' href="javascript:void(0)" id="paper_raise_btn" class="btn paper paper-raise">get more</a></div>
+   </div>
+    <div class="coshow">   
+        <div class="for_Line"></div> 
+        <h2 class="line_title">近期漫展</h2>    
+        <div class="coshow_area">
+            <div class="coshow_term" ng-repeat="x in coshow.manzhan_list | limitTo:10">
+               <div class="coshow_term_box">
+               <img src="https://api.voide.cc/get_coshow_img?img_url={{x.img}}" alt="">
+               <div class="coshow_term_img">
+                  <p class="coshow_term_addres">{{x.address}}</p>
+                  <p class="coshow_term_time">{{x.time}}</p>               
+                </div>
+                </div>  
+                <p class="coshow_title">{{x.title}}</p>          
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+    <div class="footer">        
+		<div class="link">
+			<a class="bottomLink" href="https://blog.moeccg.com" target="_blank">关于我们</a><i>|</i><a href="/help.html" class="bottomLink" target="_blank">帮助</a><i>|</i><a href="/contact.html" class="bottomLink" target="_blank">联系我们</a><i>|</i><a href="/friend.html" class="bottomLink" target="_blank">友情链接</a>
+		</div>
+		<p class="link line-2">
+			Email：<a class="bottomLink" href="mailto:month_time@outlook.com">month_time@outlook.com</a>
+		</p>
+		<p class="link line-3">
+			moeccg - 导航你的二次元生活！
+		</p>
+    </div>
+</div>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope,$http) {  
+        $scope.pixiv_put={works:[]};
+        $http({
+            method: 'get',
+            url: 'https://api.voide.cc/get_bilibili_api'
+        }).then(function successCallback(response) {
+            $scope.bili_news = response.data;
+        }, function errorCallback(response) {
+            // error
+        });
+        $http({
+            method: 'GET',
+            url: 'https://api.avoid.ink/get_pixiv'
+        }).then(function successCallback(response) {
+            $scope.pixiv = response.data;
+            for(var i=0;i<10;i++){
+                $scope.pixiv_put.works.push($scope.pixiv.works[$scope.pixiv_put.works.length]);
+            }
+        }, function errorCallback(response) {
+            // error
+        });
+        $http({
+            method: 'GET',
+            url: 'https://api.voide.cc/get_coshow'
+        }).then(function successCallback(response) {
+            $scope.coshow = response.data;
+            console.log($scope.coshow);
+        }, function errorCallback(response) {
+            // error
+        });
+        $http({
+            method: 'GET',
+            url: 'https://api.voide.cc/get_acfun_api'
+        }).then(function successCallback(response) {
+            $scope.acfun = response.data;
+            console.log($scope.acfun);
+        }, function errorCallback(response) {
+            // error
+        });
+        $http({
+            method: 'GET',
+            url: 'https://api.voide.cc/get_anime_list'
+        }).then(function successCallback(response) {
+            $scope.anime_list = response.data;
+            console.log($scope.anime_list);
+        }, function errorCallback(response) {
+            // error
+        });        
+        $scope.getmore=function(){
+            for(var i=0;i<10;i++){
+                $scope.pixiv_put.works.push($scope.pixiv.works[$scope.pixiv_put.works.length]);
+            }
+            console.log($scope.pixiv_put);
+        };
+    });
+
+    $(document).ready(function(){  
+  var tabWrapper = $('#tab-block'),
+      tabMnu = tabWrapper.find('.tab-mnu  li'),
+      tabContent = tabWrapper.find('.tab-cont > .tab-pane');  
+  tabContent.not(':first-child').hide();  
+  tabMnu.each(function(i){
+    $(this).attr('data-tab','tab'+i);
+  });
+  tabContent.each(function(i){
+    $(this).attr('data-tab','tab'+i);
+  });  
+  tabMnu.click(function(){
+    var tabData = $(this).data('tab');
+    tabWrapper.find(tabContent).hide();
+    tabWrapper.find(tabContent).filter('[data-tab='+tabData+']').show(); 
+  });  
+  $('.tab-mnu > li').click(function(){
+    var before = $('.tab-mnu li.active');
+    before.removeClass('active');
+    $(this).addClass('active');
+   }); 
+  $('.act_three .left_list li a').click(function(e){
+      console.log(e.target.innerText);
+      switch (e.target.innerText){
+          case 'Home':$('html,body').animate({scrollTop:0},1000);break; 
+          case '哔哩哔哩':$('html,body').animate({scrollTop:$('.bilibili')[0].offsetTop},1000);break; 
+          case 'Acfun文章':$('html,body').animate({scrollTop:$('.acfun')[0].offsetTop},1000);break; 
+          case 'Pixiv国际周榜':$('html,body').animate({scrollTop:$('.pixiv')[0].offsetTop},1000);break; 
+          case '近期漫展':$('html,body').animate({scrollTop:$('.coshow')[0].offsetTop},1000);break; 
+          default:break;
+    };
+  });   
+});
+    </script>
+</div>
+</body>
+</html>

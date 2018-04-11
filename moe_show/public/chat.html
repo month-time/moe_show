@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="stylesheet" href="./stylesheets/style.css">
+<link rel="stylesheet" href="./stylesheets/typinyin.css">
+<title>New HMTL document by NewJect</title>
+<script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+<!--<script src="/socket.io/socket.io.js"></script>-->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<!--<script src="./javascripts/typinyin.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="./javascripts/typinyin.js" type="text/javascript" async defer></script>
+<script src="./javascripts/Convert_Pinyin.js" type="text/javascript" async defer></script>
+</head>
+<body>
+<div id="mainPal">
+   <div class="top_box">aaa</div>
+   <div class="mainPal">
+    <div class="tool_box">
+        <div>
+            <div id="disconnect">断开连接</div>
+            <div id="reconnect">重新连接</div>
+            <div id="obj">获取对象</div>
+        </div>
+    </div>
+<!--   消息区-->
+    <div class="msg_box">
+        <ul class="messages">
+            <li>
+            <span class="title"><i class="user_ico"><img src="./images/mxb.jpg" alt=""></i>小圆</span>
+            <p id="typinyin">正因生来一无所有，因此我们能拥有一切。</p>
+            </li>
+                        <li>
+            <span class="title"><i class="user_ico"><img src="./images/mxb.jpg" alt=""></i>小圆</span>
+            <p id="pinyin">正因生来一无所有，因此我们能拥有一切。</p>
+            </li>
+                        <li>
+            <span class="title"><i class="user_ico"><img src="./images/mxb.jpg" alt=""></i>小圆</span>
+            <p id="asss">正因生来一无所有，因此我们能拥有一切。</p>
+            </li>
+                        <li>
+            <span class="title"><i class="user_ico"><img src="./images/mxb.jpg" alt=""></i>小圆</span>
+            <p id="qsss">正因生来一无所有，因此我们能拥有一切。</p>
+            </li>
+        </ul>
+        <form id="push_msg">
+          <input id="m" autocomplete="off" />
+          <button>Send</button>
+        </form>
+    </div>
+    </div>
+</div>
+<script>
+window.onload=function(){
+    //获取全写拼音（调用js中方法）
+    var fullName = pinyin.getFullChars("沃德天薩達看來就行橙");
+    //获取简写拼音（调用js中方法）
+    var easyName = pinyin.getCamelChars("沃德天薩達看來就行橙");  
+    console.log(fullName)
+    console.log(easyName)
+    loadJson();
+    var abc = new Vue({
+    data:{},
+    methods:{},
+    mounted:function(){},
+    }).$mount('#mainPal');
+    window.demo = new Typinyin();
+	demo.attach('#typinyin');
+	demo.setOptions({
+        sentences: [
+		    {
+			    ch: ["正因，",{pause: 1500},"生来一无所有，","因此我们","能拥有有有",{del: 2},"一切。"],
+    			py: ["zhengyin","","shenglaiyiwusuoyou","","yinciwomennnnn\b\b\b\b\b\b\bge","nengyongyou","","一切"],
+    		}
+    	],
+    	startDelay: 800, // Time before typing starts, in ms
+    	typeSpeed: 80, // Time gap between each character, in ms
+    	backSpeed: 50, // Backspacing speed, in ms
+    	cursorChar: "",
+    	loop: false, // Loop when finished typing
+    });
+    demo.finished = function() {
+        this.element.typinyin
+        console.log("Typinyin.js Demo Finished!");
+    };
+}
+function load(){
+    get_nikename();
+    loadJson();
+    var socket = io('http://localhost:3000',{'force new connection': true});
+//    发送消息
+    document.querySelector("#push_msg button").onclick=function(){
+        var msg_poi={
+            id:socket.id,
+            name:nikename,
+            message:document.querySelector("#m").value
+        }
+        socket.emit('chat message', msg_poi);
+//        socket.emit('chat message', document.querySelector("#m").value);
+        document.querySelector("#m").value;
+        return false;
+    }
+//    监听聊天消息
+    socket.on('chat message', function(msg){
+      var get_message=$('<li>').html('<span class="title"><i class="user_ico"><img src="./images/mxb.jpg" alt=""></i>'+msg.name+'</span><p>'+msg.message+'</p>');
+      $('#messages').append(get_message);
+        get_message[0].scrollIntoView();
+        console.log(msg);
+    });
+
+    socket.on("login",function(msg){
+       console.log(msg);
+    });
+//    主动断开连接
+    document.querySelector("#disconnect").onclick=function(){
+        socket.disconnect();
+    }
+
+//    主动断开连接
+    document.querySelector("#reconnect").onclick=function(){
+        socket=io({'force new connection': true});
+    }
+    document.querySelector("#obj").onclick=function(){
+        console.log(socket);
+    }
+}
+function get_nikename(){
+    window.nikename = prompt("请输入您的名字", "");
+    if(window.nikename==""||window.nikename==null||window.nikename==undefined){
+        get_nikename();
+    }else{
+        alert('您的昵称是:'+window.nikename);
+    }
+}
+function loadJson(){
+	var xmlhttp;
+	if (window.XMLHttpRequest){xmlhttp=new XMLHttpRequest();}
+	else{xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");}
+    xmlhttp.open("get","http://api.hitokoto.cn",true);
+	xmlhttp.send("");
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			data=xmlhttp.responseText;
+            jsonTo=JSON.parse(data);
+            var get_message=document.createElement("li");
+            get_message.innerHTML='<span class="title"><i class="user_ico"><img src="./images/mxb.jpg" alt=""></i>'+jsonTo.from+'</span><p>'+jsonTo.hitokoto+'</p>';
+            document.querySelector(".messages").append(get_message)
+            get_message.scrollIntoView();     
+
+            console.log(jsonTo.hitokoto.split(""));
+            var poi=pinyin.getFullChars(jsonTo.hitokoto);
+            poi=Letter_division(poi);
+
+            console.log(poi.split(","));
+            demo.options.sentences[0].ch=jsonTo.hitokoto.split("");
+            demo.options.sentences[0].py=poi.split(",");
+            
+            demo.attach(get_message.querySelector("p"));
+            demo.init(); // Initialize and start typing
+        }
+	}
+}
+function Letter_division(str){
+    var newstr=str.split("");
+    for(var i=0;i<newstr.length;i++){
+        if(i==0){continue}
+        if(/[a-z]/.test(newstr[i])==false){
+            newstr.splice(i, 0, ",");
+            i++;
+        }        
+    }
+    newstr=newstr.join("");
+    return newstr;
+}
+</script>
+</body>
+</html>
