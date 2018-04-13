@@ -8,8 +8,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 //Scheduled Tasks modules
-var schedule = require("node-schedule");
-var scheduled_tasks = require('./public/javascripts/Scheduled_Tasks');
+//var schedule = require("node-schedule");
+//var scheduled_tasks = require('./script/Scheduled_Tasks');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -64,27 +64,32 @@ app.use(function (err, req, res, next) {
 
 app.set('port', process.env.PORT || 3000);
 
+
 var server = app.listen(app.get('port'), function () {
     debug('Express server listening on port ' + server.address().port);
 });
 
 //创建socket服务
 var io = require('socket.io')(server);
+//const adminNamespace = io.of('/admin');
 //监听客户端连接事件
 io.on('connection', function(socket){
-  socket.broadcast.emit("login",{id:'1000',name:"System",message:socket.id+'登录了'});
-//  客户端断开连接事件
-  socket.on('disconnect', function(){
-      console.log(socket.id+"连接断开");
-      io.emit('disconnect',{id:'1000',name:"System", message:socket.id+"连接断开"});
-//      io.emit('chat message', io.sockets.clients());
-  });
-//    获取用户聊天消息信息
-  socket.on('chat message', function(msg){
-      io.emit('chat message', {id:msg.id,name:msg.name,message:msg.message});
-  });
-
+  socket.broadcast.emit("login",{id:socket.id,name:"System",message:socket.id+'登录了'});
+  console.log(socket.id+'登录了');
+  
+//  socket.join("rbar");
+//  
+////  客户端断开连接事件
+//  socket.on('disconnect', function(){
+//      console.log(socket.id+"连接断开");
+//      io.emit('disconnect',{id:'1000',name:"System", message:socket.id+"连接断开"});
+////      io.emit('chat message', io.sockets.clients());
+//  });
+////    获取用户聊天消息信息
+//  socket.on('chat message', function(msg){
+//      io.emit('chat message', {id:msg.id,name:msg.name,message:msg.message});
+//  });
 });
 
-console.log("阿斯蒂芬");
+//console.log("阿斯蒂芬");
 //scheduled_tasks.scheduled_tasks();

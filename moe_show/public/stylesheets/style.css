@@ -15,12 +15,26 @@ body {
 .top_box {
   background-color: #5682a3;
   width: 100%;
-  height: 5rem;
+  height: 4rem;
+}
+.top_box,
+.top_box * {
+  color: #fff;
+}
+.top_box .head_connecting_text {
+  color: #b9cfe3;
+  padding: 1.25rem 15px;
+  font-size: 13px;
+  display: block;
+  line-height: 20px;
+  float: left;
 }
 .tool_box {
-  background-color: #5682a3;
+  border-right: 2px solid #E9EBED;
+  background-color: #fff;
   width: 8rem;
   color: #fff;
+  padding-top: 0.5rem;
 }
 .tool_box div {
   text-align: center;
@@ -39,26 +53,53 @@ body {
   position: relative;
   height: calc(100vh - 5rem);
 }
-.msg_box form#push_msg {
+.msg_box div#push_msg {
   display: flex;
   justify-content: space-between;
-  height: 5rem;
+  height: 4rem;
   width: 100%;
   border: none;
   position: absolute;
   bottom: 0;
+  padding: 0.5rem 1rem;
 }
-.msg_box form input {
-  border: none;
-  padding: .5rem 1rem;
-  width: -webkit-fill-available;
+.msg_box div#push_msg .user_ico {
+  margin: 0.5rem;
+}
+.msg_box div#push_msg textarea {
+  width: calc(100% - 12.5rem);
+  overflow: none;
+  overflow-y: scroll;
+  border-radius: 0;
+  border: 0;
+  outline: none;
+  box-shadow: 0 1px 0 0 #e8e8e8;
+  padding: 1px 28px 1px 0;
+  position: relative;
   margin: 0;
-  margin-right: .5%;
+  min-height: 52px;
+  line-height: 20px;
+  height: auto;
+  box-sizing: border-box;
+  resize: none;
 }
-.msg_box form button {
+.msg_box div#push_msg textarea::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 10px;
+}
+.msg_box div#push_msg textarea::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+.msg_box div#push_msg textarea::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, #00fff4), color-stop(0.72, #00fff4), color-stop(0.86, #00fff5));
+}
+.msg_box div#push_msg button {
   background: #82e0ff;
   border: none;
   padding: .5rem 1rem;
+  margin: 0 2rem 0 0;
 }
 .msg_box .messages {
   overflow: overlay;
@@ -77,20 +118,36 @@ body {
   padding: 0.5rem;
   vertical-align: top;
 }
-.msg_box .messages li .title i.user_ico {
+.msg_box .messages li p {
+  margin-left: 5rem;
+  position: relative;
+  top: -1.5rem;
+}
+.msg_box .messages li.self {
+  text-align: right;
+  position: relative;
+  padding: 5px 10px;
+}
+.msg_box .messages li.self .title {
+  width: 100%;
+  display: box;
+  padding: 0.5rem;
+  vertical-align: top;
+}
+.msg_box .messages li.self p {
+  margin-right: 5rem;
+  position: relative;
+  top: -1.5rem;
+}
+.msg_box i.user_ico {
   overflow: hidden;
   border-radius: 50%;
   display: inline-block;
   width: 3rem;
   height: 3rem;
-  margin: 0 0.5rem;
+  margin: 0 1rem;
 }
-.msg_box .messages li .title i.user_ico img {
+.msg_box i.user_ico img {
   width: 100%;
   height: 100%;
-}
-.msg_box .messages li p {
-  margin-left: 5rem;
-  position: relative;
-  top: -1.5rem;
 }

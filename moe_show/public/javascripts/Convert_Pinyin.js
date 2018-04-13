@@ -6,6 +6,11 @@ authors: Bill Lue
 requires:
   core/1.2.1: '*'
 provides: [Pinyin]
+
+//    获取全写拼音（调用js中方法）
+//    var fullName = pinyin.getFullChars("沃德天薩達看來就行橙");
+//    获取简写拼音（调用js中方法）
+//    var easyName = pinyin.getCamelChars("沃德天薩達看來就行橙"); 
 ...
 */
 //(function( window, undefined ){

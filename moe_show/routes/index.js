@@ -1,12 +1,12 @@
 ﻿'use strict';
 var express = require('express');
 var router = express.Router();
-var get_coshow = require('../public/javascripts/get_coshow');
-var get_pixiv = require('../public/javascripts/get_pixiv');
-var get_acfun = require('../public/javascripts/get_acfun');
-var get_acfun_api = require('../public/javascripts/get_acfun_api');
-var get_bilibili_api = require('../public/javascripts/get_bilibili_api');
-var proxy = require('../public/javascripts/proxy');
+var get_coshow = require('../script/get_coshow');
+var get_pixiv = require('../script/get_pixiv');
+var get_acfun = require('../script/get_acfun');
+var get_acfun_api = require('../script/get_acfun_api');
+var get_bilibili_api = require('../script/get_bilibili_api');
+var proxy = require('../script/proxy');
 /* GET home page. */
 router.get('/', function (req, res) {
     res.render('index', { title: "月詩計's Api"});
