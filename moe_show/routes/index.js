@@ -7,6 +7,7 @@ var get_acfun = require('../script/get_acfun');
 var get_acfun_api = require('../script/get_acfun_api');
 var get_bilibili_api = require('../script/get_bilibili_api');
 var proxy = require('../script/proxy');
+var api_bot = require('../script/api_bot');
 /* GET home page. */
 router.get('/', function (req, res) {
     res.render('index', { title: "月詩計's Api"});
@@ -85,6 +86,13 @@ router.get('/reg', function (req, res) {
     res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');  
     login.reg(req, res);
+});
+
+router.get('/api_bot', function (req, res) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');  
+    api_bot.api_bot(req, res);
 });
 
 module.exports = router;
