@@ -35,7 +35,7 @@
 }
 function get_piximg(qwe,abc) {
     var request = require('request');
-    //    var pageurl = "https://i.pximg.net/img-original/img/2017/06/10/00/05/42/63303214_p0.png";
+//    var pageurl = "https://i.pximg.net/img-original/img/2017/06/10/00/05/42/63303214_p0.png";
     var options = {
         url: "https://i.pximg.net/img-original/img/2017/06/16/18/00/13/63410503_p0.jpg",
         headers: {
